@@ -5,7 +5,8 @@ import router from "./routes/index.js";
 import dbConnector from "./App.js";
 import morgan from "morgan";
 import cors from "cors";
-import session from "express-session";
+const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const app = express();
 dotenv.config();
 
@@ -16,14 +17,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "anything",
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    }),
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: 60 * 60 * 1000, // Session expiration time in milliseconds (1 hour)
-      httpOnly: true,
-      secure: false, // Set to true in production with HTTPS
-    },
+    secret: "keyboard cat",
   })
 );
 
@@ -33,7 +33,7 @@ app.use("/api/", router);
 dbConnector;
 const PORT = process.env.PORT || 4200;
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`🚀 Server running on port: http://localhost:${PORT}`);
 });
 
