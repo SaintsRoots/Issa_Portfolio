@@ -7,6 +7,7 @@ import morgan from "morgan";
 import cors from "cors";
 const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
+
 const app = express();
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     secret: "keyboard cat",
+
   })
 );
 
