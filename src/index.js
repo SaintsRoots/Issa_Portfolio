@@ -31,7 +31,7 @@ app.use(
 
 app.use(express.json());
 // Routes
-app.use("/api/", router);
+app.use("/api", router);
 dbConnector;
 const PORT = process.env.PORT || 4200;
 
