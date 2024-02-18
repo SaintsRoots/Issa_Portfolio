@@ -23,7 +23,7 @@ Ensure you have the following installed before proceeding with the setup:
 
 1. **Clone the repository:**
 
-git clone https://github.com/muhozajohn/Reco_Portfolio
+git clone https://github.com/muhozajohn/Issa_Portfolio
 cd projectname-backend
 
 2. **Install dependencies:**
