@@ -31,6 +31,18 @@ const options = {
       name: "Logout",
       description: "Operations related to Logout entities",
     },
+    {
+      name: "Work",
+      description: "Operations related to Work entities",
+    },
+    {
+      name: "Experince",
+      description: "Operations related to Experince entities",
+    },
+    {
+      name: "About",
+      description: "Operations related to About entities",
+    },
   ],
   paths: {
     "/api/user/auth": {
@@ -408,7 +420,7 @@ const options = {
     },
     "/api/project/read": {
       get: {
-        tags: ["User"],
+        tags: ["Project"],
         summary: "Get All Projects",
         description: "Get all posted Project",
         security: [
@@ -558,6 +570,375 @@ const options = {
         responses: {
           200: {
             description: "Project updated successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    // Work
+    "/api/work/create": {
+      post: {
+        tags: ["Work"],
+        summary: "new Work",
+        description: "new Work",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  workDesc: {
+                    type: "string",
+                    description: "Description of Work",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+          required: true,
+        },
+        responses: {
+          201: {
+            description: "Work created successfully",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/work/read": {
+      get: {
+        tags: ["Work"],
+        summary: "Get All Work",
+        description: "Get all posted Work",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        responses: {
+          200: {
+            description: "Work  retrieved successfully",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/work/update/{id}": {
+      put: {
+        tags: ["Work"],
+        summary: "Update a Work",
+        description: "Update an existing Work with new data.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the Project to be updated",
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  workDesc: {
+                    type: "string",
+                    description: "Description of Work",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Work updated successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+
+    // experience
+
+    "/api/experience/create": {
+      post: {
+        tags: ["Experince"],
+        summary: "new Experince",
+        description: "new Experince",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  experienceDesc: {
+                    type: "string",
+                    description: "Description of Experince",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+          required: true,
+        },
+        responses: {
+          201: {
+            description: "Experince created successfully",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/experience/read": {
+      get: {
+        tags: ["Experince"],
+        summary: "Get All Experince",
+        description: "Get all posted Experince",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        responses: {
+          200: {
+            description: "Experince  retrieved successfully",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/experience/update/{id}": {
+      put: {
+        tags: ["Experince"],
+        summary: "Update a Work",
+        description: "Update an existing Experince with new data.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the Experince to be updated",
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  experienceDesc: {
+                    type: "string",
+                    description: "Description of Experince",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Experince updated successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    // about
+
+    "/api/about/create": {
+      post: {
+        tags: ["About"],
+        summary: "new About",
+        description: "new About",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  aboutDesc: {
+                    type: "string",
+                    description: "Description of About",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+          required: true,
+        },
+        responses: {
+          201: {
+            description: "About created successfully",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/about/read": {
+      get: {
+        tags: ["About"],
+        summary: "Get All About",
+        description: "Get all posted About",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        responses: {
+          200: {
+            description: "About  retrieved successfully",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/about/update/{id}": {
+      put: {
+        tags: ["About"],
+        summary: "Update a About",
+        description: "Update an existing About with new data.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the About to be updated",
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  aboutDesc: {
+                    type: "string",
+                    description: "Description of About",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "About updated successfully",
           },
           400: {
             description: "Bad request",
