@@ -76,7 +76,7 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## Contact
 
-- Your Name - [mailto:muhozajohn250@gmail.com.com](mailto:muhozajohn250@gmail.com.com)
+- Email - [mailto:muhozajohn250@gmail.com.com](mailto:muhozajohn250@gmail.com.com)
 - Project Link: [https://github.com/muhozajohn/Reco_Portfolio](https://github.com/muhozajohn/Reco_Portfolio)
 
 ## Acknowledgments
