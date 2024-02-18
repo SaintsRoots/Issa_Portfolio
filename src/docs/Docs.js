@@ -24,16 +24,8 @@ const options = {
       description: "Operations related to User Applicant entities",
     },
     {
-      name: "Blog",
-      description: "Operations related to Blog Post entities",
-    },
-    {
       name: "Project",
       description: "Operations related to Project Post entities",
-    },
-    {
-      name: "Testmonial",
-      description: "Operations related to Testmonial Post entities",
     },
     {
       name: "Logout",
@@ -343,6 +335,229 @@ const options = {
         responses: {
           200: {
             description: "User Account updated successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+
+    // Project
+    "/api/project/create": {
+      post: {
+        tags: ["Project"],
+        summary: "new Project",
+        description: "new Project",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        parameters: [],
+        requestBody: {
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  Image: {
+                    type: "string",
+                    format: "binary",
+                    description: "Project Image",
+                  },
+                  title: {
+                    type: "string",
+                    description: "title of Project",
+                    example: "Klab",
+                  },
+
+                  description: {
+                    type: "string",
+                    description: "Description of Post",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+          required: true,
+        },
+        responses: {
+          201: {
+            description: "New Project created successfully",
+          },
+          400: {
+            description: "Bad Request",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/project/read": {
+      get: {
+        tags: ["User"],
+        summary: "Get All Projects",
+        description: "Get all posted Project",
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        responses: {
+          200: {
+            description: "All Project  retrieved successfully",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+
+    "/api/project/read/{id}": {
+      get: {
+        tags: ["Project"],
+        summary: "Read Project By ID",
+        description: "Get a Project post by ID",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            description: "ID of the Project post",
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+          },
+        ],
+        security: [
+          {
+            bearerAuth: [], // Add the security requirement for this endpoint
+          },
+        ],
+        responses: {
+          200: {
+            description: "Project  retrieved successfully",
+          },
+          404: {
+            description: "Project  not found",
+          },
+          500: {
+            description: "Internal Server Error",
+          },
+        },
+      },
+    },
+    "/api/project/delete/{id}": {
+      delete: {
+        tags: ["Project"],
+        summary: "Delete a Project",
+        description: "Delete an existing Project by its ID.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the Project post to be deleted",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Project deleted successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Blog post not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+
+    "/api/project/update/{id}": {
+      put: {
+        tags: ["Project"],
+        summary: "Update a Project",
+        description: "Update an existing Project with new data.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the Project to be updated",
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "multipart/form-data": {
+              schema: {
+                type: "object",
+                properties: {
+                  Image: {
+                    type: "string",
+                    format: "binary",
+                    description: "Project Image",
+                  },
+                  title: {
+                    type: "string",
+                    description: "title of project",
+                    example: "Klab",
+                  },
+
+                  description: {
+                    type: "string",
+                    description: "Description of Post",
+                    example:
+                      " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          200: {
+            description: "Project updated successfully",
           },
           400: {
             description: "Bad request",
