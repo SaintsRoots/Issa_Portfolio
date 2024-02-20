@@ -36,8 +36,8 @@ const options = {
       description: "Operations related to Work entities",
     },
     {
-      name: "Experince",
-      description: "Operations related to Experince entities",
+      name: "Experience",
+      description: "Operations related to Experience entities",
     },
     {
       name: "About",
@@ -713,9 +713,9 @@ const options = {
 
     "/api/experience/create": {
       post: {
-        tags: ["Experince"],
-        summary: "new Experince",
-        description: "new Experince",
+        tags: ["Experience"],
+        summary: "new Experience",
+        description: "new Experience",
         security: [
           {
             bearerAuth: [], // Add the security requirement for this endpoint
@@ -730,9 +730,20 @@ const options = {
                 properties: {
                   experienceDesc: {
                     type: "string",
-                    description: "Description of Experince",
+                    description: "Description of Experience",
                     example:
                       " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                  title: {
+                    type: "string",
+                    description: "Experience Title",
+                    example: "publishing and graphic design,",
+                  },
+                  desc: {
+                    type: "string",
+                    description: "Experience  Description overview",
+                    example:
+                      " Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content,",
                   },
                 },
               },
@@ -742,7 +753,7 @@ const options = {
         },
         responses: {
           201: {
-            description: "Experince created successfully",
+            description: "Experience created successfully",
           },
           400: {
             description: "Bad Request",
@@ -755,9 +766,9 @@ const options = {
     },
     "/api/experience/read": {
       get: {
-        tags: ["Experince"],
-        summary: "Get All Experince",
-        description: "Get all posted Experince",
+        tags: ["Experience"],
+        summary: "Get All Experience",
+        description: "Get all posted Experience",
         security: [
           {
             bearerAuth: [], // Add the security requirement for this endpoint
@@ -765,7 +776,7 @@ const options = {
         ],
         responses: {
           200: {
-            description: "Experince  retrieved successfully",
+            description: "Experience  retrieved successfully",
           },
           500: {
             description: "Internal Server Error",
@@ -775,9 +786,9 @@ const options = {
     },
     "/api/experience/update/{id}": {
       put: {
-        tags: ["Experince"],
+        tags: ["Experience"],
         summary: "Update a Work",
-        description: "Update an existing Experince with new data.",
+        description: "Update an existing Experience with new data.",
         security: [
           {
             bearerAuth: [],
@@ -792,7 +803,7 @@ const options = {
               type: "string",
               pattern: "^[0-9a-fA-F]{24}$",
             },
-            description: "Unique identifier of the Experince to be updated",
+            description: "Unique identifier of the Experience to be updated",
           },
         ],
         requestBody: {
@@ -804,9 +815,20 @@ const options = {
                 properties: {
                   experienceDesc: {
                     type: "string",
-                    description: "Description of Experince",
+                    description: "Description of Experience",
                     example:
                       " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                  title: {
+                    type: "string",
+                    description: "Experience Title",
+                    example: "publishing and graphic design,",
+                  },
+                  desc: {
+                    type: "string",
+                    description: "Experience  Description overview",
+                    example:
+                      " Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content,",
                   },
                 },
               },
@@ -815,7 +837,7 @@ const options = {
         },
         responses: {
           200: {
-            description: "Experince updated successfully",
+            description: "Experience updated successfully",
           },
           400: {
             description: "Bad request",
@@ -825,6 +847,49 @@ const options = {
           },
           404: {
             description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+
+    "/api/experience/delete/{id}": {
+      delete: {
+        tags: ["Experience"],
+        summary: "Delete a Experience",
+        description: "Delete an existing Experience by its ID.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description:
+              "Unique identifier of the Experience post to be deleted",
+          },
+        ],
+        responses: {
+          200: {
+            description: "Experience deleted successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "Experience post not found",
           },
           500: {
             description: "Internal server error",
@@ -856,6 +921,17 @@ const options = {
                     description: "Description of About",
                     example:
                       " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
+                  },
+                  title: {
+                    type: "string",
+                    description: "Skills Title",
+                    example: "publishing and graphic design,",
+                  },
+                  desc: {
+                    type: "string",
+                    description: "Skills  Description overview",
+                    example:
+                      " Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content,",
                   },
                 },
               },
@@ -931,6 +1007,17 @@ const options = {
                     example:
                       " In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. Wikipedia",
                   },
+                  title: {
+                    type: "string",
+                    description: "Skills Title",
+                    example: "publishing and graphic design,",
+                  },
+                  desc: {
+                    type: "string",
+                    description: "Skills  Description overview",
+                    example:
+                      " Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content,",
+                  },
                 },
               },
             },
@@ -948,6 +1035,47 @@ const options = {
           },
           404: {
             description: "Not found",
+          },
+          500: {
+            description: "Internal server error",
+          },
+        },
+      },
+    },
+    "/api/about/delete/{id}": {
+      delete: {
+        tags: ["About"],
+        summary: "Delete About",
+        description: "Delete an existing About by its ID.",
+        security: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            schema: {
+              type: "string",
+              pattern: "^[0-9a-fA-F]{24}$",
+            },
+            description: "Unique identifier of the About post to be deleted",
+          },
+        ],
+        responses: {
+          200: {
+            description: "About deleted successfully",
+          },
+          400: {
+            description: "Bad request",
+          },
+          401: {
+            description: "Unauthorized",
+          },
+          404: {
+            description: "About post not found",
           },
           500: {
             description: "Internal server error",
