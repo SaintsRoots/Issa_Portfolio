@@ -4,8 +4,11 @@ import { experience } from "../models/Works";
 
 export const createexperience = async (req, res) => {
   try {
-    const { experienceDesc } = req.body;
-    const makexperience = await experience.create({ experienceDesc });
+    const { experienceDesc, title, desc } = req.body;
+    const makexperience = await experience.create({
+      experienceDesc,
+      experience: { title, desc },
+    });
     return res.status(201).json({
       status: "201",
       message: "experience Create Well",
@@ -43,7 +46,7 @@ export const getAllexperience = async (req, res) => {
 
 export const updateexperience = async (req, res) => {
   try {
-    const { experienceDesc } = req.body;
+    const { experienceDesc, title, desc } = req.body;
     const { id } = req.params;
     const findId = await experience.findById(id);
 
@@ -53,7 +56,10 @@ export const updateexperience = async (req, res) => {
         message: "experience Id Not Found",
       });
     }
-    await experience.findByIdAndUpdate(id, { experienceDesc });
+    await experience.findByIdAndUpdate(id, {
+      experienceDesc,
+      experience: { title, desc },
+    });
     return res.status(201).json({
       status: "201",
       message: "experience Updated Well",
@@ -62,6 +68,33 @@ export const updateexperience = async (req, res) => {
     return res.status(500).json({
       status: "500",
       message: "experience Failed to be Updated",
+      error: error.message,
+    });
+  }
+};
+
+// delete
+
+export const deleteEpx = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const findId = await experience.findById(id);
+
+    if (!findId) {
+      return res.status(404).json({
+        status: "404",
+        message: "experience Id Not Found",
+      });
+    }
+    await experience.findByIdAndDelete(id);
+    return res.status(200).json({
+      status: "200",
+      message: "experience Deleted Well",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "500",
+      message: "experience Failed to be Deleted",
       error: error.message,
     });
   }
