@@ -4,8 +4,8 @@ import { work } from "../models/Works";
 
 export const createWork = async (req, res) => {
   try {
-    const { workDesc } = req.body;
-    const makeWork = await work.create({ workDesc });
+    const { workDesc, title, desc } = req.body;
+    const makeWork = await work.create({ workDesc, skills: { title, desc } });
     return res.status(201).json({
       status: "201",
       message: "Work Create Well",
@@ -43,7 +43,7 @@ export const getAllWork = async (req, res) => {
 
 export const updateWork = async (req, res) => {
   try {
-    const { workDesc } = req.body;
+    const { workDesc, title, desc } = req.body;
     const { id } = req.params;
     const findId = await work.findById(id);
 

@@ -16,6 +16,14 @@ const aboutSchema = new mongoose.Schema(
     aboutDesc: {
       type: String,
     },
+    skills: {
+      title: {
+        type: String,
+      },
+      desc: {
+        type: String,
+      },
+    },
   },
   { timestamps: true }
 );
@@ -25,6 +33,14 @@ const experienceSchema = new mongoose.Schema(
   {
     experienceDesc: {
       type: String,
+    },
+    experience: {
+      title: {
+        type: String,
+      },
+      desc: {
+        type: String,
+      },
     },
   },
   { timestamps: true }

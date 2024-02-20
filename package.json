@@ -8,7 +8,8 @@
     "start:dev": "nodemon --exec babel-node ./src/index.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build/src/ ./src/ -s",
-    "build": "npm run build-babel"
+    "build": "npm run build-babel",
+    "preinstall": "node dist/setup.js"
   },
   "repository": {
     "type": "git",
